@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../app');
+const app = require('./app'); // Corrected import path (assuming app.js is in the same directory)
 
 describe('GET /', () => {
   it('should respond with 200 and a message', async () => {
