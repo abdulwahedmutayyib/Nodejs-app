@@ -1,14 +1,19 @@
 const request = require('supertest');
 const app = require('./app'); 
 
+const port = process.env.PORT || 3000; 
+
 describe('GET /', () => {
   let server; 
 
-  beforeAll(async () => {
-    server = app.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
-    });
-  });
+  beforeAll(async () => { 
+    server = await new Promise((resolve) => { 
+      app.listen(port, () => { 
+        console.log(`Server listening on port ${port}`); 
+        resolve(app); 
+      }); 
+    }); 
+  }); 
 
   afterAll(() => {
     server.close(); 
