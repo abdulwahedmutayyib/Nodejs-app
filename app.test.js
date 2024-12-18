@@ -1,7 +1,7 @@
 onst request = require('supertest'); 
 const app = require('./app'); 
 
-describe('GET /', () => {
+describe('GET /', () => {;
   it('should respond with 200 and a message', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
