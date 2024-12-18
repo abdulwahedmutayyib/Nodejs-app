@@ -1,7 +1,7 @@
-const request = require('supertest'); 
-const app = require('./app'); // Assuming your app.js file exports the Express app instance
+const request = require('supertest');
+const app = require('./app'); // Assuming your app.js exports the Express app instance
 
-const port = process.env.PORT || 3000; // Define port here
+const port = process.env.PORT || 3000; 
 
 describe('GET /', () => {
   let server;
