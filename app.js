@@ -1,4 +1,4 @@
-onst request = require('supertest');
+const request = require('supertest');
 const app = require('./app'); // Assuming app.js initializes and exports the server
 
 describe('GET /', () => {
