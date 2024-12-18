@@ -1,12 +1,9 @@
-beforeAll(async () => {
-  return new Promise((resolve, reject) => {
-    app.listen(port, (err) => {
-      if (err) {
-        reject(err); 
-      } else {
-        console.log(`Server listening on port ${3000}`);
-        resolve(); 
-      }
-    });
+const app = require('./app'); // Replace with the path to your app file
+
+describe('GET /', () => {
+  it('should respond with 200 and a message', async () => {
+    const response = await request(app).get('/');
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('Hello from Node.js!'); // Replace with expected response
   });
 });
