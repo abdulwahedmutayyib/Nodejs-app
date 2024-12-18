@@ -1,3 +1,10 @@
+// app.js
+const express = require('express');
+const app = express(); 
+
+// ... your app routes and middleware here ...
+
+module.exports = app; 
 const express = require('express');
 
 const app = express();
