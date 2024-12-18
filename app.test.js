@@ -1,7 +1,5 @@
 const request = require('supertest');
-const app = require('./app'); // Assuming your app.js exports the Express app instance
-
-const port = process.env.PORT || 3000; 
+const app = require('./app'); // Assuming app.js initializes and exports the server
 
 describe('GET /', () => {
   let server;
@@ -12,7 +10,8 @@ describe('GET /', () => {
         if (err) {
           reject(err);
         } else {
-          resolve();
+          console.log(`Server listening on port ${port}`); // Log here
+          resolve(); 
         }
       });
     });
@@ -27,6 +26,6 @@ describe('GET /', () => {
   it('should respond with 200 and a message', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hello from Node.js!'); 
+    expect(response.text).toBe('Hello from Node.js!');
   });
 });
