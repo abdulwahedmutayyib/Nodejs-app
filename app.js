@@ -7,6 +7,16 @@ app.get('/', (req, res) => {
   res.send('Hello from Node.js!');
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`); 
+const server = app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
+
+// Graceful server shutdown
+process.on('SIGINT', () => {
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
+});
+
+module.exports = app; // Export app for testing purposes (if needed)
