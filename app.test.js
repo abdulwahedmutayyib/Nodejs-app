@@ -13,8 +13,11 @@ describe('GET /', () => {
   beforeAll(async () => {
     server = await new Promise((resolve, reject) => {
       app.listen(port, (err) => {
-        if (err) reject(err);
-        resolve();
+        if (err) {
+          reject(err);
+        } else {
+          resolve(server); // Resolve with the server instance
+        }
       });
     });
   });
