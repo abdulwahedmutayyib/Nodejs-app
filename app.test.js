@@ -10,27 +10,25 @@ describe('GET /', () => {
   let server;
   const port = 3000;
 
-  beforeAll(async () => {
-    server = await new Promise((resolve, reject) => {
-      app.listen(port, (err) => {
-        if (err) {
-          reject(err); 
-        } else {
-          resolve({ server, port }); // Resolve with both server and port
-        }
-      });
+  beforeAll((done) => {
+    server = app.listen(port, (err) => {
+      if (err) {
+        return done(err);
+      }
+      done();
     });
   });
 
-  afterAll(async () => {
-    if (server) { 
-      await server.close(); 
+  afterAll((done) => {
+    if (server) {
+      server.close(done); // Close the server and call done when it's closed
+    } else {
+      done();
     }
   });
 
   it('should respond with 200', async () => {
-    const response = await request(`http://localhost:${server.address().port}`) 
-                      .get('/'); 
+    const response = await request(`http://localhost:${port}`).get('/');
     expect(response.status).toBe(200);
   });
 });
