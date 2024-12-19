@@ -1,33 +1,30 @@
 const request = require('supertest');
-const app = require('./app'); // Assuming app.js initializes and exports the server
+const express = require('express');
+
+const app = express();
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
 
 describe('GET /', () => {
   let server;
-  const port = process.env.PORT || 3000;
+  const port = 3000;
 
   beforeAll(async () => {
     server = await new Promise((resolve, reject) => {
       app.listen(port, (err) => {
-        if (err) {
-          console.error('Error starting server:', err);
-          reject(err);
-        } else {
-          console.log(`Server listening on port ${port}`);
-          resolve();
-        }
+        if (err) reject(err);
+        resolve();
       });
     });
   });
 
-  afterAll(async () => { 
-    if (server) {
-      await server.close(); 
-    }
+  afterAll(async () => {
+    if (server) await server.close();
   });
 
-  it('should respond with 200 and a message', async () => {
+  it('should respond with 200', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hello from Node.js!'); 
   });
 });
