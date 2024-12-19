@@ -23,7 +23,9 @@ describe('GET /', () => {
   });
 
   afterAll(async () => {
-    if (server) await server.close();
+    if (server) { 
+      await server.close(); 
+    }
   });
 
   it('should respond with 200', async () => {
