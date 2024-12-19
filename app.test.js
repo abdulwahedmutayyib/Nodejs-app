@@ -3,7 +3,7 @@ const app = require('./app'); // Assuming app.js initializes and exports the ser
 
 describe('GET /', () => {
   let server;
-  const port = process.env.PORT || 3000; // Use environment variable or default port
+  const port = process.env.PORT || 3000;
 
   beforeAll(async () => {
     server = await new Promise((resolve, reject) => {
@@ -20,7 +20,6 @@ describe('GET /', () => {
   });
 
   afterAll(async () => { 
-    // Use async/await for proper handling of server.close()
     if (server) {
       await server.close(); 
     }
