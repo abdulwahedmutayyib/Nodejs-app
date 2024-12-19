@@ -16,11 +16,22 @@ spec:
       - name: awm
         image: wahed1321/awm:123
         ports:
-        - containerPort: 3000 
+        - containerPort: 3000
         resources:
           requests:
-            cpu: "50m"        # Minimum CPU requested
-            memory: "128Mi"   # Minimum memory requested
+            cpu: "50m"
+            memory: "128Mi"
           limits:
-            cpu: "100m"       # Maximum CPU allowed
-            memory: "256Mi"    # Maximum memory allowed
+            cpu: "100m"
+            memory: "256Mi"
+      # Add initContainer for notification
+      initContainers:
+      - name: notification
+        image: busybox:1.33
+        command: ["sh", "-c", "if [ -f /tmp/deployment-success ]; then echo 'Deployment Successful'; else echo 'Deployment Failed'; fi && exit 0"]
+        volumeMounts:
+        - name: success-marker
+          mountPath: /tmp
+      volumes:
+      - name: success-marker
+        emptyDir: {}
