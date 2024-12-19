@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: awm-deployment
+spec:
+  replicas: 3 # Number of pods to run
+  selector:
+    matchLabels:
+      app: awm
+  template:
+    metadata:
+      labels:
+        app: awm
+    spec:
+      containers:
+      - name: awm
+        image: wahed1321/awm:123
+        ports:
+        - containerPort: 3000 
+        resources:
+          requests:
+            cpu: "50m"        # Minimum CPU requested
+            memory: "128Mi"   # Minimum memory requested
+          limits:
+            cpu: "100m"       # Maximum CPU allowed
+            memory: "256Mi"    # Maximum memory allowed
