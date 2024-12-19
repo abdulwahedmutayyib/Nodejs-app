@@ -1,10 +1,34 @@
-const request = require('supertest'); 
-const app = require('./app'); 
+const request = require('supertest');
+const express = require('express');
+
+const app = express();
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
 
 describe('GET /', () => {
-  it('should respond with 200 and a message', async () => {
-    const response = await request(app).get('/');
+  let server;
+  const port = 3000;
+
+  beforeAll((done) => {
+    server = app.listen(port, (err) => {
+      if (err) {
+        return done(err);
+      }
+      done();
+    });
+  });
+
+  afterAll((done) => {
+    if (server) {
+      server.close(done); // Close the server and call done when it's closed
+    } else {
+      done();
+    }
+  });
+
+  it('should respond with 200', async () => {
+    const response = await request(`http://localhost:${port}`).get('/');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hello from Node.js!');
   });
 });

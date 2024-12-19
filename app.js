@@ -1,11 +1,12 @@
 const express = require('express');
 
 const app = express();
-const port = process.env.PORT || 3000;
 
+// Define a route for the root path ('/') using the GET method
 app.get('/', (req, res) => {
-  res.send('Hello from Node.js!');
+  res.send('Hello from Node.js!'); 
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+// ... other routes and middleware ...
+
+module.exports = app; 
