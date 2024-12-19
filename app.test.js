@@ -14,9 +14,9 @@ describe('GET /', () => {
     server = await new Promise((resolve, reject) => {
       app.listen(port, (err) => {
         if (err) {
-          reject(err);
+          reject(err); 
         } else {
-          resolve(server); // Resolve with the server instance
+          resolve({ server, port }); // Resolve with both server and port
         }
       });
     });
@@ -29,7 +29,8 @@ describe('GET /', () => {
   });
 
   it('should respond with 200', async () => {
-    const response = await request(app).get('/');
+    const response = await request(`http://localhost:${server.address().port}`) 
+                      .get('/'); 
     expect(response.status).toBe(200);
   });
 });
