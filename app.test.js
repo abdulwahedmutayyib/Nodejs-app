@@ -3,6 +3,7 @@ const app = require('./app'); // Assuming app.js initializes and exports the ser
 
 describe('GET /', () => {
   let server;
+  const port = process.env.PORT || 3000; // Use environment variable or default port
 
   beforeAll(async () => {
     server = await new Promise((resolve, reject) => {
@@ -10,8 +11,8 @@ describe('GET /', () => {
         if (err) {
           reject(err);
         } else {
-          console.log(`Server listening on port ${port}`); // Log here
-          resolve(); 
+          console.log(`Server listening on port ${port}`); 
+          resolve();
         }
       });
     });
@@ -26,6 +27,6 @@ describe('GET /', () => {
   it('should respond with 200 and a message', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hello from Node.js!');
+    expect(response.text).toBe('Hello from Node.js!'); 
   });
 });
