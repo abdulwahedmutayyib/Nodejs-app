@@ -1,11 +1,12 @@
-const express = require('express'); 
+const express = require('express');
 
 const app = express();
 
-// ... your app routes and middleware here ...
+// Define a route for the root path ('/') using the GET method
+app.get('/', (req, res) => {
+  res.send('Hello from Node.js!'); 
+});
+
+// ... other routes and middleware ...
 
 module.exports = app; 
-
-// If you need to use Express again in this file (which is generally not recommended within the same file):
-// const anotherExpressApp = express(); 
-// ... use anotherExpressApp for a separate Express instance ...
