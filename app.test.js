@@ -19,15 +19,16 @@ describe('GET /', () => {
     });
   });
 
-  afterAll(() => {
+  afterAll(async () => { 
+    // Use async/await for proper handling of server.close()
     if (server) {
-      server.close();
+      await server.close(); 
     }
   });
 
   it('should respond with 200 and a message', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hello from Node.js!'); // Adjust expected response if needed
+    expect(response.text).toBe('Hello from Node.js!'); 
   });
 });
